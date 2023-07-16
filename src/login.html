@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat Alternates' rel='stylesheet'>
+</head>
+
+<body> 
+
+        <div class="login__container container-fluid d-flex justify-content-center align-items-center">
+            <div class="row">
+                <div class="login__form col-12 d-flex justify-content-center align-items-center flex-wrap">
+                    <div class="login__title">
+                        Вход в аккаунт
+                    </div>
+                    <form id="login">
+                        <div class="mb-3">
+                          <label class="form-label">Адрес электронной почты</label>
+                          <input type="email" class="form-control" id="email" required>
+                          <div id="emailHelp" class="form-text">Например: example@gmail.com</div>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label">Пароль</label>
+                          <input type="password" class="form-control" id="pass" required>
+                        </div>
+                        <div class="mb-3 d-flex justify-content-center">
+                            <button type="submit">Вход</button>
+                        </div>
+                    </form>
+
+                    <div class="login__link">
+                        <a href="signup.html">Регистрация аккаунта</a>
+                    </div>
+
+                    <div class="error__message col-12 d-flex justify-content-center text-center"></div>
+
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

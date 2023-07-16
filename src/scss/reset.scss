@@ -1,0 +1,163 @@
+/* Reset and base styles  */
+
+body{
+	font-family: 'Montserrat Alternates';
+}
+
+* {
+	padding: 0px;
+	margin: 0px;
+	border: none;
+	box-sizing: border-box;
+	&::before {
+		box-sizing: border-box;
+	}
+	&::after {
+		box-sizing: border-box;
+	}
+}
+/* Links */
+a {
+	text-decoration: none;
+	&:link {
+		text-decoration: none;
+	}
+	&:visited {
+		text-decoration: none;
+	}
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+/* Common */
+
+aside {
+	display: block;
+}
+nav {
+	display: block;
+}
+footer {
+	display: block;
+}
+header {
+	display: block;
+}
+section {
+	display: block;
+}
+main {
+	display: block;
+}
+h1 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+h2 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+h3 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+h4 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+h5 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+h6 {
+	font-size: inherit;
+	font-weight: inherit;
+}
+p {
+	font-size: inherit;
+	font-weight: inherit;
+}
+ul {
+	list-style: none;
+	li {
+		list-style: none;
+	}
+}
+img {
+	vertical-align: top;
+	max-width: 100%;
+	height: auto;
+}
+svg {
+	max-width: 100%;
+	height: auto;
+}
+address {
+	font-style: normal;
+}
+
+
+/* Form */
+
+input {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+	&::-ms-clear {
+		display: none;
+	}
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		outline: none;
+	}
+}
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+}
+button {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+	display: inline-block;
+	box-shadow: none;
+	background-color: transparent;
+	background: none;
+	cursor: pointer;
+	&:focus {
+		outline: none;
+	}
+	&:active {
+		outline: none;
+	}
+	&::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+}
+select {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background-color: transparent;
+}
+input[type="submit"] {
+	display: inline-block;
+	box-shadow: none;
+	background-color: transparent;
+	background: none;
+	cursor: pointer;
+}
+label {
+	cursor: pointer;
+}
+legend {
+	display: block;
+}

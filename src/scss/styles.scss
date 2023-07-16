@@ -1,0 +1,360 @@
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+@import '/src/scss/reset.scss';
+
+body {  
+    font-family: 'Montserrat Alternates';
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+.art-container {
+    height: 100%;
+    background-image: url( '../images/layered-waves.svg' );
+    background-size: cover;
+    background-repeat:   no-repeat;
+    background-position: center center;    
+
+    .art-container__header{
+        h2 {
+            font-size: 3vw;
+            font-weight: 700;
+            color:#1d1d1f;
+        }
+    }
+
+    .art-container__row{
+        height: 100%;
+        
+    }
+
+    .art-container__content {
+        min-height: 52vh;
+        height: 100%;
+
+        img {
+            border-radius: 15px;
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+
+        .art-container__load {
+            height: 120px;
+            width: 120px;
+            position: absolute;
+            margin-top: -20px;
+            margin-left: -20px;
+            display: none;
+        
+            &::before {
+                content: "";
+                display: block;
+                position: absolute;
+                left: -1px;
+                top: -1px;
+                height: 100%;
+                width: 100%;
+                animation: rotation 1s linear infinite;
+                border: 5px solid #141414;
+                border-top: 1px solid transparent;
+                border-radius: 100%;
+            }
+            & > .icon {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                height: 25px;
+                width: 10.6px;
+                margin-top: -12.5px;
+                margin-left: -5.3px;
+                animation: wink 1s ease-in-out infinite alternate;
+            }
+          }
+
+    }
+
+    .art-container__generate{
+        text-align: center;
+        label{
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 15px;
+        }
+        input {
+            display: block;
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            border-radius: 15px;
+            color: var(--bs-body-color);
+            background-color: var(--bs-body-bg);
+            background-clip: padding-box;
+        }
+    }
+
+    .art-container__button {
+        margin: 25px;
+        background-color: #262626;
+        border-radius: 15px;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 17px;
+        padding: 4px 27px;
+        text-decoration: none;
+        text-shadow: 1px 0px 0px #ded17c;
+        width: 182px;
+        height: 46px;
+        &:hover {
+            background-color: #262626;
+            transition: all .1s ease;
+            border:3px solid #ed970e;
+        }
+        &:active {
+            position: relative;
+            top: 1px;
+            border:3px solid #ed970e;
+        }
+    }
+}
+
+.art-order {
+    display: none;
+    background-image: url( '../images/wave-haikei.svg' );
+    background-size: cover;
+    background-repeat:   no-repeat;
+
+
+    .art-order__header{
+        font-size: 50px;
+        font-weight: 600;
+        margin-top: 15%;
+        margin-bottom: 50px;
+
+        text-decoration-line: underline;
+        text-decoration-style: "solid";
+        text-decoration-color: rgba(232,54,0,1);
+        text-decoration-thickness: 10px;
+        text-underline-offset: 15px;
+    }
+
+    .art-order__calculate{
+       // background:#c2a1a1;
+        background: white;
+        border: 3px solid #e5e5e5;
+        border-radius: 15px;
+
+        p{
+            font-size: 20px;
+            font-weight: 600;
+            margin: 15px 0px 10px 0px;
+        }
+        
+        input {
+            display: block;
+            width: 40%;
+            height: 40px;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            text-align: center;
+            border-radius: 15px;
+            border: 1px solid black;
+            color: var(--bs-body-color);
+            background-color: var(--bs-body-bg);
+            background-clip: padding-box;
+            &::-webkit-outer-spin-button {
+                -webkit-appearance: none;
+            }
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+            }
+            &[type="color"]{
+                width: 20%;
+            }
+            &:disabled{
+                background-color:#7a78785e
+            }
+        }
+        span {
+            font-size: 30px;
+            margin: 0px 5px 0px 5px;
+            border-left-width: 0;
+            border-right-width: 0;
+            &:first-child {
+                border-left-width: 1px;
+            }
+            &:last-child {
+                border-right-width: 1px;
+            }
+        }
+        .art-order__frame{
+            height: 115px;
+            width: 195px;
+            margin: 5px;
+        }
+        .activeFrame {
+            border: 2px solid green;
+        }
+
+        button{
+            background-color: #262626;
+            margin-top: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 17px;
+            text-decoration: none;
+            text-shadow: 1px 0px 0px #ded17c;
+            width: 200px;
+            height: 50px;
+            &:hover {
+                background-color: #262626;
+                transition: all .1s ease;
+                border:3px solid #ed970e;
+            }
+            &:active {
+                position: relative;
+                top: 1px;
+                border:3px solid #ed970e;
+            }
+        }   
+        
+    }
+
+    .art-order__inputs{
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    // .art-order__art{
+    //    // background:#7a7878
+    // }
+
+
+
+    .art-order__upper{
+        margin-top: 50px;
+        height: 450px;
+        width: 450px;
+        margin-bottom: 50px;
+        padding: 20px;
+
+
+        background-image: url( '../images/1.jfif' );
+        background-size: cover;
+        background-repeat:   no-repeat;
+        background-position: center center;    
+    }
+
+    .art-order__middle{
+        height: 100%;
+        width: 100%;
+        background:#db9c49;
+        padding: 40px;
+
+        img{
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+            border: 2px solid rgb(233, 228, 220);
+        }
+    }
+
+    .art-order__order {
+        text-align: center;
+    }
+
+    .art-order__order button{
+        background-color: #262626;
+        border-radius: 15px;
+        display: inline-block;
+        cursor: pointer;
+        color: #ffffff;
+        font-size: 17px;
+        text-decoration: none;
+        text-shadow: 1px 0px 0px #ded17c;
+        width: 200px;
+        height: 50px;
+        &:hover {
+            background-color: #262626;
+            transition: all .1s ease;
+            border:3px solid #ed970e;
+        }
+        &:active {
+            position: relative;
+            top: 1px;
+            border:3px solid #ed970e;
+        }
+    }   
+
+}
+
+
+
+.preloader {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    top: calc(50vh - 30px);
+    left: calc(50% - 30px);
+    margin-top: -20px;
+    margin-left: -20px;
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -1px;
+        top: -1px;
+        height: 100%;
+        width: 100%;
+        animation: rotation 1s linear infinite;
+        border: 5px solid #ed970e;
+        border-top: 1px solid transparent;
+        border-radius: 100%;
+    }
+    & > .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 25px;
+        width: 10.6px;
+        margin-top: -12.5px;
+        margin-left: -5.3px;
+        animation: wink 1s ease-in-out infinite alternate;
+    }
+  }
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+  @keyframes wink {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.content{
+    opacity: 0;
+}
+  

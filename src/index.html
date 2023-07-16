@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat Alternates' rel='stylesheet'>
+</head>
+<body>
+  <div class="content">
+
+      <!-- Template tags-->
+      <%= require('html-loader!./templates/header.html').default %>
+      <!-- Template tags-->
+
+
+      <div class="art-container container-fluid">
+        <div class="art-container__row row d-flex justify-content-center flex-column align-items-center">
+            <div class="art-container__header mt-3 mb-3 d-flex justify-content-center">
+              <h2>AI ART'S GENERATOR</h2>
+            </div>
+            <div class="art-container__content col-6 d-flex justify-content-center align-items-center">
+              <div class="art-container__load"></div>
+              <img src="./images/logoDalle.svg">
+            </div>
+            <div class="art-container__generate col-8">
+                <label class="">Нарисуйте картину своей мечты лишь при помощи слов!</label>
+                <input type="text" id="prompt" placeholder="Все что нужно - лишь сделать запрос и немного воображения">
+                <div class="form-text w-100" style="color: white">
+                  Запрос должен состоять не менее чем из 3 символов *
+                </div>
+                <button type="submit" class="art-container__button" disabled="true">Я готов!</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="art-order container-fluid">
+        <div class="row d-flex justify-content-around">
+          <div class="art-order__header col-12 text-center">
+            <h2>Выбери свой стиль!</h2>
+          </div>
+          <div class="art-order__calculate col-5 text-center">
+              <p>Выбери подходящий багет</p>
+              <div class="col-12 d-flex flex-wrap justify-content-between">
+                <img class="art-order__frame activeFrame" src="./images/1.gif" data-img="../images/1.jfif" data-cost="9">
+                <img class="art-order__frame" src="./images/2.gif" data-img="../images/2.jfif" data-cost="5.66">
+                <img class="art-order__frame" src="./images/3.gif" data-img="../images/3.jfif" data-cost="6.73">
+                <img class="art-order__frame" src="./images/4.gif" data-img="../images/4.jfif" data-cost="12.30">
+                <img class="art-order__frame" src="./images/5.gif" data-img="../images/5.jfif" data-cost="24.20">
+                <img class="art-order__frame" src="./images/6.gif" data-img="../images/6.jfif" data-cost="14.40">
+                <img class="art-order__frame" src="./images/7.gif" data-img="../images/7.jfif" data-cost="12.30">
+                <img class="art-order__frame" src="./images/8.gif" data-img="../images/8.jfif" data-cost="17">
+              </div>
+              <p>Выберите цвет и грубину паспарту (см)</p>
+              <div class="col-12 d-flex justify-content-center flex-column">
+                <div class="form-text w-100">
+                  Глубина паспарту не может превышать 120см.
+                </div>
+                <div class="d-flex justify-content-center mt-1">
+                  <input type="color" id="paspartColor" value="#db9c49">
+                  <input type="text" id="paspart" class="ms-3" value="40">
+                </div>
+              </div>
+              
+              <p>Выберите размер картины (см)</p>
+              <div class="col-12">
+                <div class="form-text">
+                  Размер должен быть не менее 25см и не превышать 250см.
+                </div>
+                <div class="art-order__inputs d-flex justify-content-center">
+                    <input type="text" id="artLength" value="150"/>
+                    <span style="border-left: 0; border-right: 0;">X</span>
+                    <input type="number" id="artLengthRepeat" value="150" disabled/>
+                </div>
+              </div>
+              <p>Желаемое количество картин</p>
+              <div class="col-12 d-flex justify-content-center">
+                <input type="number" id="amount" value="1"/>
+              </div>
+              <button type="submit" id="calculateBtn">Рассчитать сумму</button>
+          </div>
+
+
+          <div class="art-order__art col-6 d-flex justify-content-center align-items-center flex-wrap flex-column">
+              <div class="col-12 d-flex justify-content-center">
+                <div class="art-order__upper">
+                  <div class="art-order__middle">
+                    <img src="./images/photo_2023-07-06_22-02-37.jpg"></img>
+                  </div>
+                </div>
+              </div>
+
+              <div class="art-order__order col-12 d-flex justify-content-center align-items-center flex-wrap flex-column">
+                <h2>0 BYN</h2>
+                <div>
+                  <button type="submit" id="addToCart">В корзину</button>
+                  <button type="submit" id="saveImg">Сохранить</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preloader"></div>
+
+
+</body>
+</html>
