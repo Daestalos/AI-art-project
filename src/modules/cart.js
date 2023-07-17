@@ -45,7 +45,9 @@ const addToCart = async () => {
         if(cartData.status != 200){
             throw new Error('error');
         } else {
-            window.location = '/cart.html'
+            setTimeout(() => {
+                window.location = '/cart.html'
+            }, 1500)
         }
     } 
     catch (error){

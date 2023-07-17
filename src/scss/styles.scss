@@ -12,6 +12,7 @@ body {
 }
 
 .art-container {
+    min-height: 100vh;
     height: 100%;
     background-image: url( '../images/layered-waves.svg' );
     background-size: cover;

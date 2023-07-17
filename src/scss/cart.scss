@@ -151,6 +151,10 @@ body {
         .cart__form{
             width: calc(100vw - 50vw);
             padding: 32px 40px;
+
+            label {
+                font-weight: 600;
+            }
         }
         form {
             width: 100%;
@@ -177,6 +181,7 @@ body {
                 border:3px solid #ed970e;
             }
         }
+        
 
         .cart__link a {
             color: #262626;

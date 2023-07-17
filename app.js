@@ -23,13 +23,19 @@ const app = express();
 const db = admin.firestore();
 
 app.use(cors({credentials:true}))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({ 
+    parameterLimit: 100000,
+    extended: false,
+    limit: '50mb'
+ }))
 
 app.get('/', (req, res) =>{
     res.set('Content-Type', 'text/html; charset=utf-8');
     res.send("<h1>Hi</h1>")
 })
+
+// user
 
 app.post('/createUser', async (req, res) => {
     const user = {
@@ -55,14 +61,17 @@ app.post('/createUser', async (req, res) => {
     res.json(userResponse);
 })
 
+// image
+
 app.post('/generate', async (req, res) => {
     console.log(req.body);
     const prompt = {
         prompt: req.body.prompt,
         n: 1,
-        size: "512x512"
+        size: "256x256"
     }
     const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
+    res.json(imgUrl)
 
     // const openai = new OpenAIApi(configuration);
     // const response = await openai.createImage(prompt)
@@ -76,8 +85,12 @@ app.post('/generate', async (req, res) => {
     //     const base64Image = "data:" + image.headers["content-type"] + ";base64,"+raw;
     //     res.json(base64Image)
     // })
-    res.json(imgUrl)
+
 })
+
+
+
+// cart
 
 app.post('/cart', async (req, res) => {
     try{
@@ -100,36 +113,6 @@ app.post('/cart', async (req, res) => {
     }
 })
 
-app.post('/order', async (req, res) => {
-    try{
-        const data = req.body.data
-        console.log(data);
-        // const cart = {
-        //     amount: req.body.amount,
-        //     date: req.body.date,
-        //     frame: req.body.frame,
-        //     image: req.body.image,
-        //     paspartColor: req.body.paspartColor,
-        //     paspartSize: req.body.paspartSize,
-        //     price: req.body.price,
-        //     prompt: req.body.prompt,
-        //     size: req.body.size,
-        //     uid: req.body.uid
-        // }
-
-        const order = {
-            uid: req.body.uid,
-            email: req.body.email,
-            phone: req.body.phone,
-            data: req.body.data
-        }
-        const response = db.collection(`order/`).add(order)
-        res.json(response)
-    } catch(error){
-        res.json(error)
-    }
-})
-
 app.post('/cart/all', async (req, res) => {
     try {
         const response = await db.collection(`users/${req.body.uid}/cart`).get();
@@ -139,16 +122,6 @@ app.post('/cart/all', async (req, res) => {
             data: doc.data()
         }));
         res.json(cartData);
-    } catch (error) {
-        res.json(error)
-    }
-})
-
-app.post('/delete/:id', async (req, res) => {
-    try {
-        console.log(req.params.id);
-        const response = await db.collection(`users/${req.body.uid}/cart`).doc(req.params.id).delete();
-        res.json(response);
     } catch (error) {
         res.json(error)
     }
@@ -165,6 +138,36 @@ app.post('/cartDelete', async (req, res) => {
         res.json(error)
     }
 })
+
+app.post('/delete/:id', async (req, res) => {
+    try {
+        console.log(req.params.id);
+        const response = await db.collection(`users/${req.body.uid}/cart`).doc(req.params.id).delete();
+        res.json(response);
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+// blog
+
+app.post('/upload', async (req, res) => {
+    try{
+        const uploadImg = {
+            name: req.body.name,
+            uid: req.body.uid,
+            image: req.body.image,
+            prompt: req.body.prompt,
+            date: req.body.date
+        }
+        const response = db.collection(`blog/`).add(uploadImg)
+        res.json(response)
+    } catch(error){
+        res.json(error)
+    }
+})
+
+
 
 app.listen(PORT, () => {
     console.log(`Backend is running on ${PORT}`);

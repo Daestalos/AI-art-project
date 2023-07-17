@@ -5,6 +5,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {validateArtLength, selectFrame, calculateCost, validatePaspartAndColor} from './modules/calculate';
 import { addToCart } from './modules/cart';
 import { generateArt, validatePromptInput } from './modules/generate';
+import { publicImg } from './modules/blog';
 
 
 const auth = getAuth();
@@ -59,6 +60,11 @@ if (document.querySelector('#addToCart')){
     addToCartBtn.addEventListener('click', addToCart)
 }
 
+if(document.querySelector('#publicImg')){
+    const publicImgAtBlog = document.querySelector('#publicImg')
+    publicImgAtBlog.addEventListener('click', publicImg)
+}
+
 if (document.querySelector('.art-container__button')){
     const generateArtBtn = document.querySelector('.art-container__button')
     generateArtBtn.addEventListener('click', generateArt);
@@ -77,3 +83,4 @@ if(document.querySelector('#offcanvasOpen') && document.querySelector('#offcanva
     offcanvasCloseBtn.addEventListener('click', () => document.querySelector('#offcanvas').classList.remove('show'))
     
 }
+
