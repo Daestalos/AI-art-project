@@ -31,7 +31,8 @@ const userSignIn = async (e) => {
 }
 
 
-const userSignOut = async () => {
+const userSignOut = async (e) => {
+    e.preventDefault();
     await signOut(auth);
     window.location.href = 'login.html';
 }

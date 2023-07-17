@@ -41,8 +41,11 @@ const addToCart = async () => {
             headers: { "Content-Type": "application/json;charset=UTF-8"}
         })
         
+
         if(cartData.status != 200){
             throw new Error('error');
+        } else {
+            window.location = '/cart.html'
         }
     } 
     catch (error){
@@ -62,11 +65,21 @@ const getCart = () => {
             })
             .then(data => data.json())
             .then(data => {
-                dataForOrder = {
-                    uid: user.uid,
-                    data: data
+                if(!data.length) {
+                    document.querySelector('#cartOrder').disabled = true
+                    document.querySelector('.cart__header h2').innerText = 'Ожидаем ваши картины'
+                    renderCart(data);
+                } else {
+                    document.querySelector('.cart__header h2').innerText = 'Корзина пользователя'
+                    document.querySelector('#cartOrder').disabled = false   
+
+                    dataForOrder = {
+                        uid: user.uid,
+                        data: data
+                    }
+                    renderCart(data)
                 }
-                renderCart(data)
+
             })
         } else {
             window.location.href = 'login.html';
@@ -76,22 +89,18 @@ const getCart = () => {
 
 
 const deleteCartElement = (id) => {
-    console.log(id, 'delete');
     onAuthStateChanged(auth, async user => {
-        if (user) {
-            const uid = {uid: user.uid}
-            const response = await fetch(`http://localhost:80/delete/${id}`, {
-                method: "post",
-                body: JSON.stringify(uid),
-                headers: { "Content-Type": "application/json;charset=UTF-8"}
-            })
-            .then(data => data.json())
-            .then(data => getCart())
-        } else {
-            window.location.href = 'login.html';
-        }
+        const uid = {uid: user.uid}
+        fetch(`http://localhost:80/delete/${id}`, {
+            method: "post",
+            body: JSON.stringify(uid),
+            headers: { "Content-Type": "application/json;charset=UTF-8"}
+        })
+        .then(() => getCart())
     })
 }
+
+
 
 const renderCart = (data) => {
     const cartContent = document.querySelector('.cart__content');
@@ -168,6 +177,17 @@ const deleteEventSet = () => {
     })
 }
 
+const deleteCartAfterOrder = (uid) => {
+    console.log('order', uid);
+    const user = {uid: uid}
+    fetch(`http://localhost:80/cartDelete`, {
+        method: "post",
+        body: JSON.stringify(user),
+        headers: { "Content-Type": "application/json;charset=UTF-8"}
+    })
+    .then(() => getCart())
+}
+
 const createOrder =  async(e) => {
     e.preventDefault();
 
@@ -199,8 +219,11 @@ const createOrder =  async(e) => {
             setTimeout(() => {
                 message.style = 'display: none'
                 message.innerText = ''
+                deleteCartAfterOrder(data.uid);
+                window.location = '/';
             }, 5000);
         }
+
 
 
     } 

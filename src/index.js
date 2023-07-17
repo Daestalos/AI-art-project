@@ -12,7 +12,7 @@ const auth = getAuth();
 const checkAuthState = async() => {
     onAuthStateChanged(auth, user => {
         if (user) {
-            document.querySelector('#user').innerText = `Hello, ${user.displayName}`;
+            document.querySelector('#user').innerText = `Здравствуйте, ${user.displayName}!`;
         } else {
             window.location.href = 'login.html';
         }
@@ -25,7 +25,7 @@ setTimeout(closePreloader, 1000);
 
 if (document.querySelector('#singOut')){
     const signOut = document.querySelector('#singOut')
-    signOut.addEventListener('click', userSignOut)
+    signOut.addEventListener('click', (e) => userSignOut(e))
 }
 
 if (document.querySelector('#artLength') && document.querySelector('#artLengthRepeat')) {
@@ -67,4 +67,13 @@ if (document.querySelector('.art-container__button')){
 if (document.querySelector('#prompt')){
     const promptInput = document.querySelector('#prompt')
     promptInput.addEventListener('input', validatePromptInput)
+}
+
+if(document.querySelector('#offcanvasOpen') && document.querySelector('#offcanvasClose')){
+    const offcanvasOpenBtn = document.querySelector('#offcanvasOpen');
+    const offcanvasCloseBtn = document.querySelector('#offcanvasClose')
+
+    offcanvasOpenBtn.addEventListener('click', () => document.querySelector('#offcanvas').classList.add('show'))
+    offcanvasCloseBtn.addEventListener('click', () => document.querySelector('#offcanvas').classList.remove('show'))
+    
 }

@@ -1,6 +1,7 @@
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
-@import '/src/scss/reset.scss';
+@import "/src/scss/reset.scss";
+@import "./navigation.scss";
 
 body {  
     font-family: 'Montserrat Alternates';
@@ -249,7 +250,7 @@ body {
         height: 450px;
         width: 450px;
         margin-bottom: 50px;
-        padding: 20px;
+        padding: 18px;
 
 
         background-image: url( '../images/1.jfif' );

@@ -154,6 +154,18 @@ app.post('/delete/:id', async (req, res) => {
     }
 })
 
+app.post('/cartDelete', async (req, res) => {
+    try {
+        const response = await db.collection(`users/${req.body.uid}/cart`).get();
+        response.forEach(doc => 
+            db.collection(`users/${req.body.uid}/cart`).doc(doc.id).delete()
+        )
+        res.json('cartDeleted');
+    } catch (error) {
+        res.json(error)
+    }
+})
+
 app.listen(PORT, () => {
     console.log(`Backend is running on ${PORT}`);
 })
