@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat Alternates' rel='stylesheet'>
+</head>
+<body>
+    <!-- Template tags-->
+    <%= require('html-loader!./templates/header.html').default %>
+    <!-- Template tags-->
+
+    <div class="content">
+
+        <div class="container-fluid">
+            <div class="blog__container row">
+                <div class="blog__header text-center">
+                    <h2>Публикации пользователей</h2>
+                </div>
+                <div class="blog__content mt-2">
+                    <div class="blog__search d-flex flex-column align-items-center justify-content-center col-12">
+                        <input type="text" class="form-control" id="textSearch" placeholder="Поиск примеров интересующих вас изображений" >
+                        <div  class="form-text">Например: кот</div>
+                        <div class="mb-3 mt-2 d-flex justify-content-center">
+                            <button type="submit" id="search">Найти</button>
+                        </div>
+                    </div>
+                    <div class="blog__item-list col-12 d-flex flex-wrap justify-content-around">
+
+                        <!-- <div class="blog__div m-4 col-6 d-flex flex-column">
+                            <div class="blog__img col-12">
+                                <img src="./images/photo_2023-07-06_22-02-37.jpg">
+                            </div>
+                            <div class="col-12">
+                                    <label class="col-form-label">Автор: <a>Александр Бордюг</a></label>
+                                    <label class="align-self-end col-form-label">Запрос: <a>капибара на водных источниках</a></label>
+                            </div>
+                        </div> -->
+
+
+
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+
+
+
+    </div>
+
+    <div class="preloader">
+        
+    </div>
+</body>
+</html>

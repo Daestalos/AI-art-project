@@ -12,6 +12,7 @@ module.exports = {
     index_login: path.resolve(__dirname, './src/index_login.js'),
     index_signup: path.resolve(__dirname, './src/index_signup.js'),
     index_cart: path.resolve(__dirname, './src/index_cart.js'),
+    index_blog: path.resolve(__dirname, './src/index_blog.js'),
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -38,6 +39,11 @@ module.exports = {
       template: path.resolve(__dirname, './src/cart.html'),
       filename: 'cart.html',
       chunks: ['index_cart']
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/blog.html'),
+      filename: 'blog.html',
+      chunks: ['index_blog']
     }),
     new CleanWebpackPlugin(),
     new CopyPlugin({

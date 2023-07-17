@@ -167,6 +167,41 @@ app.post('/upload', async (req, res) => {
     }
 })
 
+app.get('/blog/all', async (req, res) => {
+    try {
+        const response = await db.collection('blog').get();
+        let blogArr = [];
+        response.forEach(doc => blogArr.push({
+            id: doc.id,
+            data: doc.data()
+        }));
+        res.json(blogArr);
+    } catch (error) {
+        res.json(error)
+    }
+})
+
+app.post('/search', async (req, res) => {
+    try {
+        console.log(req.body.prompt);
+        const response = await db.collection('blog').get();
+        let blogArr = [];
+        response.forEach(doc => {
+            const data = doc.data();
+            
+            if(data.prompt.includes(`${req.body.prompt}`)){
+                blogArr.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            }
+        })
+        console.log(blogArr);
+        res.json(blogArr);
+    } catch (error) {
+        res.json(error)
+    }
+})
 
 
 app.listen(PORT, () => {
