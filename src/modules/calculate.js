@@ -5,7 +5,7 @@ const calculateCost = () => {
     const meters = document.querySelector('#artLength').value / 100;
     const paspart = document.querySelector('#paspart').value;
     const amount = document.querySelector('#amount').value;
-    const frameCost = ((4 * meters) + (4 * meters) + (8 * 30) + (paspart * 5) + 10 + activeFrame) * amount
+    const frameCost = (((4 * meters) + (4 * meters) + (8 * 30) + (paspart * 5) + 10 + activeFrame) * amount).toFixed(2)
 
     sum.innerText = `${frameCost} BYN`
 }

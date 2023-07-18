@@ -2,6 +2,7 @@ import { calculateCost } from "./calculate";
 import { initializeApp } from "firebase/app";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { closePreloader } from "./preloader";
+import { sendMail } from "./mail";
 
 
 const firebaseConfig = {
@@ -81,6 +82,8 @@ const getCart = () => {
                         uid: user.uid,
                         data: data
                     }
+
+                    console.log(dataForOrder);
                     renderCart(data)
                 }
             })
@@ -224,6 +227,8 @@ const createOrder =  async(e) => {
         if(cartData.status != 200){
             throw new Error('error');
         } else {
+            sendMail(data);
+
             message.style = 'display: block'
             message.innerText = 'Успешно! С вами скоро свяжутся.'
     
