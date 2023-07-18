@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCtEmZsU0h87bDhhTevj7TL4d48VQNk8uo"
@@ -30,14 +30,11 @@ const userSignIn = async (e) => {
     });
 }
 
-
 const userSignOut = async (e) => {
     e.preventDefault();
     await signOut(auth);
     window.location.href = 'login.html';
 }
-
-
 
 export {userSignIn, userSignOut}
 

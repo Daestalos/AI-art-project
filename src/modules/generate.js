@@ -15,24 +15,17 @@ const generateArt = async () => {
     const image = document.querySelector('.art-container__content img');
     const orderImg = document.querySelector('.art-order__middle img')
 
-
-
     onAuthStateChanged(auth, async user => {
         if (user) {
-
             const prompt = {
                 prompt: promptInput.value,
                 date: new Date().toLocaleString(),
                 uid: user.uid
             }
             
-            console.log(user);
-            console.log(prompt);
             try {
-
                 image.style = 'display: none';
                 load.style = 'display: block';
-
 
                 const imageData = await fetch('http://localhost:80/generate', {
                     method: "post",
@@ -61,17 +54,12 @@ const generateArt = async () => {
                     uid: user.uid
                 }))
             } catch (error) {
-                alert(`Возникла ошибка! ${error.message} : ${error.message}`)
+                alert(`Возникла ошибка! ${error.message} : ${error.message}, свяжитесь с администратором!`)
             }
-
-
         } else {
             window.location.href = 'login.html';
         }
     })
-    
 }
-
-
 
 export {generateArt, validatePromptInput}

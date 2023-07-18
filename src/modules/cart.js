@@ -16,6 +16,7 @@ const auth = getAuth();
 const addToCart = async () => {
     calculateCost();
 
+    const message = document.querySelector('.message');
     const price = document.querySelector('.art-order__order h2').innerText;
     const activeFrame = document.querySelector('.activeFrame').dataset.img;
     const size = document.querySelector('#artLength').value;
@@ -40,27 +41,29 @@ const addToCart = async () => {
             body: JSON.stringify(cart),
             headers: { "Content-Type": "application/json;charset=UTF-8"}
         })
-        
-
         if(cartData.status != 200){
             throw new Error('error');
         } else {
+            message.style = "display: block";
+            message.classList.add('success')
+            message.innerText = "Успешно добавлено в корзину!"
             setTimeout(() => {
                 window.location = '/cart.html'
-            }, 1500)
+            }, 2000)
         }
     } 
     catch (error){
-        alert(`Возникла ошибка при добавлении картины в корзину! Свяжитесь с администратором!`)
+        message.style = "display: block";
+        message.classList.add('error')
+        message.innerText = "Произошла ошибка! Свяжитесь с администратором"
     }
 }
 
 const getCart = () => {
-    onAuthStateChanged(auth, async user => {
+    onAuthStateChanged(auth, user => {
         if (user) {
             const uid = {uid: user.uid}
-            console.log(uid);
-            const response = await fetch('http://localhost:80/cart/all', {
+            fetch('http://localhost:80/cart/all', {
                 method: "post",
                 body: JSON.stringify(uid),
                 headers: { "Content-Type": "application/json;charset=UTF-8"}
@@ -74,14 +77,12 @@ const getCart = () => {
                 } else {
                     document.querySelector('.cart__header h2').innerText = 'Корзина пользователя'
                     document.querySelector('#cartOrder').disabled = false   
-
                     dataForOrder = {
                         uid: user.uid,
                         data: data
                     }
                     renderCart(data)
                 }
-
             })
         } else {
             window.location.href = 'login.html';
@@ -92,13 +93,18 @@ const getCart = () => {
 
 const deleteCartElement = (id) => {
     onAuthStateChanged(auth, async user => {
-        const uid = {uid: user.uid}
-        fetch(`http://localhost:80/delete/${id}`, {
-            method: "post",
-            body: JSON.stringify(uid),
-            headers: { "Content-Type": "application/json;charset=UTF-8"}
-        })
-        .then(() => getCart())
+        try {
+            const uid = {uid: user.uid}
+            fetch(`http://localhost:80/delete/${id}`, {
+                method: "post",
+                body: JSON.stringify(uid),
+                headers: { "Content-Type": "application/json;charset=UTF-8"}
+            })
+            .then(() => getCart())
+        } catch (error) {
+           alert('Произошла ошибка при удалении элемента из корзины, свяжитесь с администратором!') 
+        }
+
     })
 }
 
@@ -112,7 +118,6 @@ const renderCart = (data) => {
 
     data.forEach(item => {
         price += parseInt(item.data.price);
-
 
         cartContent.insertAdjacentHTML('afterbegin', `
             <div class="cart__block col-12 d-flex flex-column flex-lg-row">
@@ -180,14 +185,18 @@ const deleteEventSet = () => {
 }
 
 const deleteCartAfterOrder = (uid) => {
-    console.log('order', uid);
-    const user = {uid: uid}
-    fetch(`http://localhost:80/cartDelete`, {
-        method: "post",
-        body: JSON.stringify(user),
-        headers: { "Content-Type": "application/json;charset=UTF-8"}
-    })
-    .then(() => getCart())
+    try {
+        const user = {uid: uid}
+        fetch(`http://localhost:80/cartDelete`, {
+            method: "post",
+            body: JSON.stringify(user),
+            headers: { "Content-Type": "application/json;charset=UTF-8"}
+        })
+        .then(() => getCart())
+    } catch (error) {
+        alert('Произошла ошибка при очистке корзины, свяжитесь с администратором!')
+    }
+
 }
 
 const createOrder =  async(e) => {
@@ -225,14 +234,10 @@ const createOrder =  async(e) => {
                 window.location = '/';
             }, 5000);
         }
-
-
-
     } 
     catch (error){
         alert(`Возникла ошибка при добавлении заказа! Свяжитесь с администратором!`)
     }
-    console.log(data);
 }
 
 export {addToCart, getCart, createOrder};

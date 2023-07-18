@@ -23,6 +23,8 @@ const checkAuthState = async() => {
 checkAuthState();
 
 const publicImg = () => {
+    const message = document.querySelector('.message');
+
     onAuthStateChanged(auth, async user => {
         try {
             const imageData = localStorage.getItem("data");
@@ -40,10 +42,26 @@ const publicImg = () => {
             
             if(response.status != 200){
                 throw new Error('error');
+            } else {
+                message.style = "display: block";
+                message.classList.add('success')
+                message.innerText = "Успешно добавлено в блог!"
+
+                setTimeout(() => {
+                    message.style = "display: none";
+                    message.classList.remove('success')
+                }, 2000)
             }
         } 
         catch (error){
-            alert(`Возникла ошибка при публиковании изображения! Свяжитесь с администратором!`)
+            message.style = "display: block";
+            message.classList.add('error')
+            message.innerText = "Произошла ошибка! Свяжитесь с администратором";
+
+            setTimeout(() => {
+                message.style = "display: none";
+                message.classList.remove('error');
+            }, 2000)
         }
     })
 }

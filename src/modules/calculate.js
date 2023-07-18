@@ -51,7 +51,6 @@ const validatePaspartAndColor = () => {
     } else {
         paspart.value = paspartValue;
     }
-    console.log(color.value, paspartValue);
     artPaspart.style = `padding: ${paspart.value}px; background: ${color.value}`;
 
     calculateCost();

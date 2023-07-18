@@ -53,7 +53,4 @@ const createAccountData = async(e) => {
 
 }
 
-
-
-
 export {createAccountData}

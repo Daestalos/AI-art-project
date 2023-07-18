@@ -11,12 +11,12 @@ const { async } = require('regenerator-runtime');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://art-project-db-default-rtdb.firebaseio.com"
+    databaseURL: process.env.FIRESTORE_DB_NAME
 });
 
 
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: process.env.FIRESTORE_API_KEY,
 });
 
 const app = express();
@@ -64,27 +64,26 @@ app.post('/createUser', async (req, res) => {
 // image
 
 app.post('/generate', async (req, res) => {
-    console.log(req.body);
     const prompt = {
         prompt: req.body.prompt,
         n: 1,
         size: "256x256"
     }
-    const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
-    res.json(imgUrl)
+    // const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
+    // res.json(imgUrl)
 
-    // const openai = new OpenAIApi(configuration);
-    // const response = await openai.createImage(prompt)
-    // .then(data=> {
-    //     console.log(data.data.data[0].url);
-    //     return data.data.data[0].url
-    // })
-    // .then(async img => {
-    //     const image = await axios.get(img, {responseType: 'arraybuffer'});
-    //     const raw = Buffer.from(image.data).toString('base64');
-    //     const base64Image = "data:" + image.headers["content-type"] + ";base64,"+raw;
-    //     res.json(base64Image)
-    // })
+    const openai = new OpenAIApi(configuration);
+    const response = await openai.createImage(prompt)
+    .then(data=> {
+        console.log(data.data.data[0].url);
+        return data.data.data[0].url
+    })
+    .then(async img => {
+        const image = await axios.get(img, {responseType: 'arraybuffer'});
+        const raw = Buffer.from(image.data).toString('base64');
+        const base64Image = "data:" + image.headers["content-type"] + ";base64,"+raw;
+        res.json(base64Image)
+    })
 
 })
 
@@ -141,7 +140,6 @@ app.post('/cartDelete', async (req, res) => {
 
 app.post('/delete/:id', async (req, res) => {
     try {
-        console.log(req.params.id);
         const response = await db.collection(`users/${req.body.uid}/cart`).doc(req.params.id).delete();
         res.json(response);
     } catch (error) {
@@ -183,7 +181,6 @@ app.get('/blog/all', async (req, res) => {
 
 app.post('/search', async (req, res) => {
     try {
-        console.log(req.body.prompt);
         const response = await db.collection('blog').get();
         let blogArr = [];
         response.forEach(doc => {
@@ -196,7 +193,6 @@ app.post('/search', async (req, res) => {
                 })
             }
         })
-        console.log(blogArr);
         res.json(blogArr);
     } catch (error) {
         res.json(error)

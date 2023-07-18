@@ -387,4 +387,15 @@ body {
 .content{
     opacity: 0;
 }
-  
+
+.message {
+    display: none;
+    font-size: 20px;
+}
+
+.error{
+    color: red;
+}
+.success{
+    color: rgb(3, 95, 3)
+}
