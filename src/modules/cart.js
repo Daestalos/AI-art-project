@@ -115,15 +115,15 @@ const renderCart = (data) => {
 
 
         cartContent.insertAdjacentHTML('afterbegin', `
-            <div class="cart__block col-12 d-flex flex-row">
-                <div class="col-6 d-flex justify-content-start">
+            <div class="cart__block col-12 d-flex flex-column flex-lg-row">
+                <div class="col-12 col-lg-6 mt-3 mt-lg-0 d-flex justify-content-center justify-content-lg-start">
                     <div class="cart-art__upper" style="background-image: url(${item.data.frame});">
                         <div class="cart-art__middle" style="background: ${item.data.paspartColor}; padding: ${item.data.paspartSize}px">
                         <img src="${item.data.image}"></img>
                         </div>
                     </div>
                 </div>
-                <div class="cart__info col-6 mt-5">
+                <div class="cart__info col-12 col-lg-6 justify-content-evenly justify-content-lg-start  mt-5">
                     <div class=" row">
                         <label class="col-5 col-form-label">Размер (см):</label>
                         <div class="col-6">
@@ -156,7 +156,7 @@ const renderCart = (data) => {
                         </div>
                     </div>
 
-                    <div class="cart__delete col-11 d-flex justify-content-center mr-1">
+                    <div class="cart__delete mb-3 mb-lg-0 col-11 d-flex justify-content-center mr-1">
                         <button class="deleteCartBtn" data-id="${item.id}">Удалить</button>
                     </div>
                 </div>
