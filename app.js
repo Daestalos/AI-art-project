@@ -70,21 +70,21 @@ app.post('/generate', async (req, res) => {
         n: 1,
         size: "256x256"
     }
-    const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
-    res.json(imgUrl)
+    // const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
+    // res.json(imgUrl)
 
-    // const openai = new OpenAIApi(configuration);
-    // const response = await openai.createImage(prompt)
-    // .then(data=> {
-    //     console.log(data.data.data[0].url);
-    //     return data.data.data[0].url
-    // })
-    // .then(async img => {
-    //     const image = await axios.get(img, {responseType: 'arraybuffer'});
-    //     const raw = Buffer.from(image.data).toString('base64');
-    //     const base64Image = "data:" + image.headers["content-type"] + ";base64,"+raw;
-    //     res.json(base64Image)
-    // })
+    const openai = new OpenAIApi(configuration);
+    const response = await openai.createImage(prompt)
+    .then(data=> {
+        console.log(data.data.data[0].url);
+        return data.data.data[0].url
+    })
+    .then(async img => {
+        const image = await axios.get(img, {responseType: 'arraybuffer'});
+        const raw = Buffer.from(image.data).toString('base64');
+        const base64Image = "data:" + image.headers["content-type"] + ";base64,"+raw;
+        res.json(base64Image)
+    })
 
 })
 
