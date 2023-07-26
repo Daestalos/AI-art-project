@@ -13,6 +13,7 @@ let dataForOrder = ''
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
+console.log(auth);
 
 const addToCart = async () => {
     calculateCost();

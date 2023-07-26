@@ -12,12 +12,12 @@ const serviceAccount = require("./serviceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://art-project-db-default-rtdb.firebaseio.com"
+    databaseURL: process.env.FIRESTORE_DB_NAME
 });
 
 
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: process.env.FIRESTORE_API_KEY,
 });
 
 const app = express();
@@ -71,7 +71,7 @@ app.post('/generate', async (req, res) => {
         size: "256x256"
     }
     // const imgUrl = 'images/photo_2023-07-06_22-02-37.jpg'
-    // res.json(imgUrl)
+    // res.json(imgUrl) "256x256"
 
     const openai = new OpenAIApi(configuration);
     const response = await openai.createImage(prompt)
@@ -217,7 +217,7 @@ app.post('/email', (req, res) =>{
             secure: true, 
             auth: {
               user: "bordyug.alex@mail.ru", 
-              pass: 'FJCeqTHNh3cQVAa9rspc', 
+              pass: process.env.MAIL_PASS, 
             },
         });
 
